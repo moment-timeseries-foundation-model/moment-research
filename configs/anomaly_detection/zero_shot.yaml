@@ -1,0 +1,40 @@
+# Data loader parameters
+task_name: "anomaly-detection"
+batch_size: 2048
+shuffle: False
+num_workers: 5
+pin_memory: True
+seq_len : 512
+scale : True
+data_stride_len: 512 # Stride length for sliding window
+train_ratio : 0.6
+val_ratio : 0.1
+test_ratio : 0.3
+random_seed : 13
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "interpolate"
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+
+# Experiment parameters
+enable_val_grad: False
+pretraining_run_name: "charmed-bee-241" # "fearless-planet-52"
+pretraining_opt_steps: null
+anomaly_criterion: 'mse'
+n_splits: 100 # Number of splits to compute adjusted best F1 score
+n_jobs: 5 # Number of parallel jobs to run
+# Downsample time-series with length > min_length*downsampling_factor 
+# by a factor of downsampling_factor
+downsampling_factor: 10 
+min_length: 2560
+enable_batchwise_pbar: False
+
+# Model parameters
+model_name: "MOMENT"
+seq_len: 512
+patch_len: 8
+patch_stride_len: 8
+transformer_backbone: 'google/flan-t5-large' # 'google/flan-t5-base' 'google/flan-t5-large'
+add_positional_embedding: False
+set_input_mask: True # True by default 

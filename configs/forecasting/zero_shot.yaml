@@ -1,0 +1,34 @@
+# Data loader parameters
+task_name: "short-horizon-forecasting"
+train_batch_size: 2048
+val_batch_size: 2048
+num_workers: 5
+pin_memory: True
+seq_len : 512
+train_ratio : 0.6
+val_ratio : 0.1
+test_ratio : 0.3
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "last" # Important because we don't want to change the sampling frequency
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+constant_values: null
+random_seed : 13
+shuffle: False
+scale : False # This is important for short zero-shot time-series forecasting datasets
+
+
+# Experiment parameters
+pretraining_run_name: "fearless-planet-52"
+pretraining_opt_steps: null
+n_jobs: 15
+
+# Model parameters
+model_name: "MOMENT"
+seq_len: 512
+patch_len: 8
+patch_stride_len: 8
+transformer_backbone: 'google/flan-t5-large' # 'google/flan-t5-base' 'google/flan-t5-large'
+add_positional_embedding: True
+set_input_mask: True # True by default 

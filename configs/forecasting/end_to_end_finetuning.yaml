@@ -1,0 +1,40 @@
+# Data loader parameters
+task_name: "long-horizon-forecasting"
+train_batch_size : 64 # 1024 2048 3072 4096
+val_batch_size: 256 # 1024 2048 3072 4096 
+shuffle: True
+scale : True 
+random_seed : 13
+
+# Data parameters
+output_type: 'multivariate' # 'multivariate' 'univariate'
+seq_len : 512
+forecast_horizon: 96
+
+# Experiment parameters
+# "avid-moon-55" "proud-dust-41" "curious-blaze-53" 
+# "laced-firebrand-51" "prime-music-50" "fast-pyramid-63" 
+# "fearless-planet-52" "snowy-shape-64"
+pretraining_run_name: "fast-pyramid-63" # "fearless-planet-52"
+pretraining_opt_steps: null
+pct_start: 0.3
+max_epoch: 50
+lr_scheduler_type: 'onecyclelr' # 'linearwarmupcosinelr' 'onecyclelr'
+finetuning_mode: "end-to-end" # "linear-probing" "end-to-end"
+dataset_names: '/TimeseriesDatasets/forecasting/autoformer/ETTh1.csv'
+debug: False
+init_lr: 0.00005 # https://stackoverflow.com/questions/53033556/how-should-the-learning-rate-change-as-the-batch-size-change
+loss_type: "mse" # MSE by default
+log_interval: 1000
+checkpoint_interval: 8000
+
+# Model parameters
+model_name: "MOMENT"
+seq_len: 512
+patch_len: 8
+patch_stride_len: 8
+transformer_backbone: 'google/flan-t5-base' # 'google/flan-t5-base' 'google/flan-t5-large'
+add_positional_embedding: False
+set_input_mask: True # True by default 
+head_dropout: 0.1
+

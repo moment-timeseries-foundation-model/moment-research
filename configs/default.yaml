@@ -1,0 +1,71 @@
+# Experiment parameters
+random_seed: 13
+notes: ""
+
+# Encoder (MOMENT) parameters
+task_name: "pre-training" # "embed"
+
+# Model parameters
+model_name: "MOMENT"
+seq_len: 512
+patch_len: 8
+patch_stride_len: 8
+revin_affine: False
+d_model: null
+dropout: 0.1
+head_dropout: 0.1
+torch_dtype: "bfloat16"
+value_embedding_bias: False # Whether to add biases to the value embeddings
+orth_gain: 1.41
+add_positional_embedding: True # Wheter to add positional embedding to the input
+set_input_mask: True # Whether to set the input mask
+randomly_initialize_backbone: True # Whether to randomly initialize the encoder
+transformer_type: "encoder_only" # "encoder_decoder" "encoder_only" "decoder_only"
+transformer_backbone: 'google/flan-t5-large' # "PatchTST" "google/flan-t5-base" "t5-large"
+freeze_transformer_backbone: False # Whether to freeze the transformer backbone
+n_soft_prompt_tokens: 20 # Number of soft prompt tokens
+
+# Logging
+log_interval: 5000
+checkpoint_interval: 5000
+debug: False
+
+# Training parameters
+mask_ratio: 0.3
+optimizer_name : "AdamW"
+enable_gradient_checkpointing: True
+max_norm: 5
+enable_val_grad: False
+
+weight_decay: 0.05
+init_lr: 0.0001 # 1e-4
+min_lr: 0.00001 # 1e-5
+lr_decay_rate: 0.9
+warmup_lr: 0.00001 # 1e-5
+warmup_steps: 1000
+use_amp: True
+max_opt_steps: 5000000
+pct_start: 0.3
+max_epoch: 50
+lr_scheduler_type: 'linearwarmupcosinelr' # 'linearwarmupcosinelr' 'onecyclelr'
+
+# Dataset parameters
+target_col : 'OT'
+scale : True
+data_stride_len : 1 
+train_ratio : 0.6
+val_ratio : 0.1
+test_ratio : 0.3
+upsampling_pad_direction : "backward"
+upsampling_type : "pad"
+downsampling_type : "interpolate"
+pad_mode : "constant"
+pad_constant_values : 0
+dataset_names : 'all'
+datasets_fraction : 1.00
+train_batch_size : 3072 # 1024 2048 3072 4096
+val_batch_size: 4096 # 1024 2048 3072 4096 
+shuffle : True
+num_workers : 5
+pin_memory : True
+drop_last : False

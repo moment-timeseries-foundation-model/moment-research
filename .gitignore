@@ -1,3 +1,11 @@
+# Project Specific
+notebooks/development/data/*
+notebooks/development/*.py
+wandb/
+# exclude shell scripts in root directory
+/*.sh
+.env
+.nfs*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

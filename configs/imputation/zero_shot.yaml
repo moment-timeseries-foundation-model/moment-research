@@ -1,0 +1,35 @@
+# Data loader parameters
+task_name: "imputation"
+train_batch_size: 2048
+val_batch_size: 2048
+shuffle: False
+num_workers: 5
+pin_memory: True
+scale : True
+data_stride_len: 512
+train_ratio : 0.7
+val_ratio : 0.1
+test_ratio : 0.2
+random_seed : 13
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "interpolate"
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+
+# Data parameters
+output_type: 'multivariate' # 'multivariate' 
+
+# Experiment parameters
+enable_val_grad: False
+pretraining_run_name: "fearless-planet-52" # "fearless-planet-52"
+pretraining_opt_steps: null
+
+# Model parameters
+model_name: "MOMENT"
+seq_len: 512
+patch_len: 8
+patch_stride_len: 8
+transformer_backbone: 'google/flan-t5-large' # 'google/flan-t5-base' 'google/flan-t5-large'
+add_positional_embedding: True
+set_input_mask: True # True by default 

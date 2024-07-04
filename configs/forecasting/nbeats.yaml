@@ -1,0 +1,43 @@
+# Experiment parameters
+run_name: Finetuning - NBeats
+random_seed : 13
+debug: False
+
+# Data loader parameters
+task_name: "long-horizon-forecasting"
+train_batch_size : 64 # 1024 2048 3072 4096
+val_batch_size: 256 # 1024 2048 3072 4096 
+shuffle: True
+num_workers: 5
+pin_memory: True
+scale : False # Do not scale short horizon datasets
+train_ratio : 0.6
+val_ratio : 0.1
+test_ratio : 0.3
+random_seed : 13
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "last"
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+
+# Experiment parameters
+run_name: null
+pct_start: 0.3
+max_epoch: 10
+lr_scheduler_type: 'onecyclelr' # 'linearwarmupcosinelr' 'onecyclelr'
+finetuning_mode: "end-to-end"
+dataset_names: '/TimeseriesDatasets/forecasting/autoformer/ETTh1.csv'
+init_lr: 0.0001 # 1e-4
+loss_type: "smape" # MSE by default
+use_amp: False # Do not used mixed precision training
+
+# Model parameters
+model_name: "N-BEATS"
+seq_len: 512
+stack_types: !!python/tuple ['trend', 'seasonality']
+nb_blocks_per_stack: 3
+thetas_dim: !!python/tuple [4, 8]
+share_weights_in_stack: False
+hidden_layer_units: 256
+nb_harmonics: null

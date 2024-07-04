@@ -1,0 +1,39 @@
+# Data loader parameters
+task_name: "short-horizon-forecasting"
+train_batch_size : 64 # 1024 2048 3072 4096
+val_batch_size: 256 # 1024 2048 3072 4096 
+shuffle: True
+num_workers: 5
+pin_memory: True
+scale : False # Do not scale short horizon datasets
+train_ratio : 0.6
+val_ratio : 0.1
+test_ratio : 0.3
+random_seed : 13
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "last"
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+
+# Experiment parameters
+pretraining_run_name: "fearless-planet-52" # "fast-pyramid-63" "fearless-planet-52"
+pretraining_opt_steps: null
+pct_start: 0.3
+max_epoch: 20
+lr_scheduler_type: 'onecyclelr'
+finetuning_mode: "linear-probing" # "linear-probing" "end-to-end"
+dataset_names: '/TimeseriesDatasets/forecasting/monash/m3_monthly_dataset.tsf'
+init_lr: 0.0003 # 1e-4
+loss_type: "smape" # MSE by default
+
+# Model parameters
+model_name: "MOMENT"
+seq_len: 512
+patch_len: 8
+patch_stride_len: 8
+transformer_backbone: 'google/flan-t5-large' # 'google/flan-t5-base' 'google/flan-t5-large'
+add_positional_embedding: True
+set_input_mask: True # True by default 
+head_dropout: 0.1
+weight_decay: 0

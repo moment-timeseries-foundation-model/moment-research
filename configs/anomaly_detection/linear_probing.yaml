@@ -1,0 +1,54 @@
+# Data loader parameters
+task_name: "anomaly-detection"
+train_batch_size : 64 # 1024 2048 3072 4096
+val_batch_size: 256 # 1024 2048 3072 4096 
+shuffle: True
+num_workers: 5
+pin_memory: True
+seq_len : 512
+scale : True 
+train_ratio : 0.5
+val_ratio : 0.2
+test_ratio : 0.3
+random_seed : 13
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "interpolate"
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+
+# Data parameters
+n_splits: 100 # Number of splits to compute adjusted best F1 score
+n_jobs: 5 # Number of parallel jobs to run
+# Downsample time-series with length > min_length*downsampling_factor 
+# by a factor of downsampling_factor
+data_stride_len : 1
+downsampling_factor: 10 
+min_length: 2560
+
+# Experiment parameters
+pretraining_run_name: "fearless-planet-52" # "fast-pyramid-63" "fearless-planet-52"
+pretraining_opt_steps: null
+pct_start: 0.3
+max_epoch: 10
+anomaly_criterion: 'mse'
+lr_scheduler_type: 'onecyclelr' # 'linearwarmupcosinelr' 'onecyclelr'
+finetuning_mode: "linear-probing" # "linear-probing" "end-to-end"
+dataset_names: '/TimeseriesDatasets/anomaly_detection/TSB-UAD-Public/KDD21/163_UCR_Anomaly_apneaecg2_10000_20950_21100.out'
+debug: False
+init_lr: 0.00005 # 5e-5
+loss_type: "mse" # MSE by default
+log_interval: 1000
+checkpoint_interval: 8000
+
+# Model parameters
+model_name: "MOMENT"
+seq_len: 512
+patch_len: 8
+patch_stride_len: 8
+transformer_backbone: 'google/flan-t5-large' # 'google/flan-t5-base' 'google/flan-t5-large'
+add_positional_embedding: True
+set_input_mask: True # True by default 
+head_dropout: 0.1
+weight_decay: 0
+

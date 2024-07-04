@@ -1,0 +1,60 @@
+# Data loader parameters
+task_name: "anomaly-detection"
+train_batch_size : 64 # 1024 2048 3072 4096
+val_batch_size: 64 # 1024 2048 3072 4096 
+shuffle: True
+num_workers: 5
+pin_memory: True
+scale : True 
+train_ratio : 0.5
+val_ratio : 0.2
+test_ratio : 0.3
+random_seed : 13
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "interpolate"
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+
+# Data parameters
+n_splits: 100 # Number of splits to compute adjusted best F1 score
+n_jobs: 5 # Number of parallel jobs to run
+downsampling_factor: 10 
+min_length: 2560
+n_channels: 1
+
+# Experiment parameters
+use_amp: False # Do not use AMP
+pct_start: 0.3
+max_epoch: 10
+anomaly_criterion: 'mse'
+lr_scheduler_type: 'onecyclelr' # 'linearwarmupcosinelr' 'onecyclelr'
+finetuning_mode: "end-to-end" # "end-to-end"
+dataset_names: '/TimeseriesDatasets/anomaly_detection/TSB-UAD-Public/KDD21/141_UCR_Anomaly_InternalBleeding5_4000_6200_6370.out'
+debug: False
+init_lr: 0.001 # 1e-3
+loss_type: "mse" # MSE by default
+log_interval: 1000
+checkpoint_interval: 8000
+
+# Model parameters
+model_name: "DGHL"
+enable_val_grad: True # Because the model does inference during validation
+
+seq_len: 512 # Corresponds to window_size and window_step
+n_channels: 1
+hidden_multiplier: 32
+max_filters: 256 # 256
+kernel_multiplier: 1
+a_L: 4  # Sub-windows [1, 4]
+z_size: 50 # Size of latent z vector [5, 25, 50]
+z_size_up: 5
+z_iters: 100  # Number of iteration in the Langevyn dynamics inference formula. [5, 25, 100] -- more the better and slower. Linear time dependence. 
+z_iters_inference: 300  # Higher the better -> 300, 500 better. 
+z_sigma: 0.25
+z_step_size: 0.1
+z_with_noise: False
+z_persistent: False  # Can only be False currently. = True means that it will start from the last latent vector when it observed the particular window. Therefore it needs higher z_iters right now. 
+normalize_windows: True
+noise_std: 0.001
+random_seed: 1

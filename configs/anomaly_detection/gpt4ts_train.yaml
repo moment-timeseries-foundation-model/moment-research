@@ -1,0 +1,64 @@
+# Data loader parameters
+task_name: "anomaly-detection"
+train_batch_size : 128 
+val_batch_size: 128
+shuffle: True
+num_workers: 5
+pin_memory: True
+scale : True 
+train_ratio : 0.5
+val_ratio : 0.2
+test_ratio : 0.3
+random_seed : 13
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "interpolate"
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+
+# Data parameters
+n_splits: 100 # Number of splits to compute adjusted best F1 score
+n_jobs: 5 # Number of parallel jobs to run
+downsampling_factor: 10 
+min_length: 2560
+n_channels: 1
+
+# Experiment parameters
+use_amp: False
+pct_start: 0.3
+max_epoch: 10
+anomaly_criterion: 'mse'
+lr_scheduler_type: 'onecyclelr' 
+finetuning_mode: "end-to-end" # "end-to-end"
+dataset_names: '/TimeseriesDatasets/anomaly_detection/TSB-UAD-Public/KDD21/163_UCR_Anomaly_apneaecg2_10000_20950_21100.out'
+debug: False
+init_lr: 0.0001 # 1e-4
+loss_type: "mse"
+log_interval: 1000
+checkpoint_interval: 8000
+
+# Model parameters
+model_name: "GPT4TS"
+forecast_horizon: 0
+# Partly based on https://github.com/DAMO-DI-ML/NeurIPS2023-One-Fits-All/blob/main/Anomaly_Detection/scripts/SWAT.sh
+gpt_layers: 3
+patch_len: 1 # 1 in configs, 8 for MOMENT
+patch_stride_len: 1 # 1 in configs, 8 for MOMENT 
+seq_len: 512
+randomly_initialize_backbone: False # Whether to randomly initialize the backbone
+transformer_backbone: 'gpt2'
+enable_gradient_checkpointing: True
+freeze_transformer_backbone: True # By default freezes everything except the layer norms and the positional embeddings
+d_ff: 128
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

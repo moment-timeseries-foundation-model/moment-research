@@ -1,0 +1,47 @@
+# Data loader parameters
+task_name: "short-horizon-forecasting"
+train_batch_size : 64 # 1024 2048 3072 4096
+val_batch_size: 256 # 1024 2048 3072 4096 
+shuffle: True
+num_workers: 5
+pin_memory: True
+scale : False # Do not scale short horizon datasets
+train_ratio : 0.6
+val_ratio : 0.1
+test_ratio : 0.3
+random_seed : 13
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "last"
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+
+# Data parameters
+n_channels: 1
+
+# Experiment parameters
+run_name: null
+pct_start: 0.3
+max_epoch: 10
+lr_scheduler_type: 'onecyclelr' # 'linearwarmupcosinelr' 'onecyclelr'
+finetuning_mode: "end-to-end"
+dataset_names: '/TimeseriesDatasets/forecasting/autoformer/ETTh1.csv'
+debug: False
+init_lr: 0.001 # 1e-3
+loss_type: "smape" # MSE by default
+use_amp: False # Do not used mixed precision training
+
+# Model parameters
+model_name: "GPT4TS"
+forecast_horizon: 0
+# Partly based on https://github.com/DAMO-DI-ML/NeurIPS2023-One-Fits-All/blob/main/Short-term_Forecasting/scripts/M4.sh
+gpt_layers: 3
+patch_len: 1 # 1 in configs, 8 for MOMENT
+patch_stride_len: 1 # 1 in configs, 8 for MOMENT 
+seq_len: 512
+randomly_initialize_backbone: False # Whether to randomly initialize the backbone
+transformer_backbone: 'gpt2'
+enable_gradient_checkpointing: True
+freeze_transformer_backbone: True # By default freezes everything except the layer norms and the positional embeddings
+d_ff: 128
+

@@ -1,0 +1,32 @@
+# Data loader parameters
+task_name: "anomaly-detection"
+train_batch_size : 64 
+val_batch_size: 64 
+shuffle: True
+num_workers: 5
+pin_memory: True
+scale : True 
+train_ratio : 0.5
+val_ratio : 0.2
+test_ratio : 0.3
+random_seed : 13
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "interpolate"
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+
+# Data parameters
+n_splits: 100 # Number of splits to compute adjusted best F1 score
+n_jobs: 5 # Number of parallel jobs to run
+downsampling_factor: 10 
+min_length: 2560
+data_stride_len: 1
+
+# Experiment parameters
+finetuning_mode: "end-to-end" 
+dataset_names: '/TimeseriesDatasets/anomaly_detection/TSB-UAD-Public/KDD21/163_UCR_Anomaly_apneaecg2_10000_20950_21100.out'
+
+# Model parameters
+model_name: "AnomalyNearestNeighbors"
+n_neighbors: 5

@@ -1,0 +1,72 @@
+# Experiment parameters
+random_seed: 13
+notes: ""
+
+# Encoder (MOMENT) parameters
+task_name: "sequence-modelling" 
+
+# Model parameters
+model_name: "MOMENT"
+run_name: 
+opt_steps: null
+d_model: 768
+transformer_type: "encoder_only" # "encoder_decoder" "encoder_only" "decoder_only"
+transformer_backbone: 'google/flan-t5-base' # "PatchTST" "google/flan-t5-base" "t5-large"
+dropout: 0.1
+orth_gain: 1.41
+torch_dtype: "bfloat16"
+randomly_initialize_backbone: True # Whether to randomly initialize the encoder
+return_last_only: True
+use_embeddings_for_input: False
+
+freeze_transformer_backbone: False # Whether to freeze the transformer backbone
+freeze_layer_norm: False
+freeze_pos: False
+freeze_ff: True
+freeze_attn: True
+input_layer_sizes: null
+output_layer_sizes: null
+
+# Dataset specific model parameters
+input_dim: 1000
+output_dim: 2000
+
+# Logging
+log_interval: 5000
+checkpoint_interval: 5000
+debug: True
+
+# Training parameters
+optimizer_name : "AdamW"
+enable_gradient_checkpointing: True
+max_norm: 5
+
+weight_decay: 0.05
+init_lr: 0.0001 # 1e-4
+min_lr: 0.00001 # 1e-5
+lr_decay_rate: 0.9
+warmup_lr: 0.00001 # 1e-5
+warmup_steps: 1000
+use_amp: True
+max_opt_steps: 5000000
+max_epoch: 50
+
+# Dataset parameters
+target_col : 'OT'
+scale : True
+data_stride_len : 1 
+train_ratio : 0.6
+val_ratio : 0.1
+test_ratio : 0.3
+upsampling_pad_direction : "backward"
+upsampling_type : "pad"
+downsampling_type : "interpolate"
+pad_mode : "constant"
+pad_constant_values : 0
+dataset_names : 'all'
+train_batch_size : 3072 # 1024 2048 3072 4096
+val_batch_size: 4096 # 1024 2048 3072 4096 
+shuffle : True
+num_workers : 5
+pin_memory : True
+drop_last : False

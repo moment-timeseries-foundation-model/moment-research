@@ -1,0 +1,44 @@
+# Data loader parameters
+task_name: "short-horizon-forecasting"
+train_batch_size : 64 # 1024 2048 3072 4096
+val_batch_size: 256 # 1024 2048 3072 4096 
+shuffle: True
+num_workers: 5
+pin_memory: True
+scale : False # Do not scale short horizon datasets
+train_ratio : 0.6
+val_ratio : 0.1
+test_ratio : 0.3
+random_seed : 13
+upsampling_pad_direction : "backward"
+upsampling_type : "pad" # pad by default
+downsampling_type : "last"
+pad_mode : "edge" # constant by default
+pad_constant_values : null
+
+# Data parameters
+n_channels: 1
+
+# Experiment parameters
+run_name: null
+pct_start: 0.3
+max_epoch: 10
+lr_scheduler_type: 'onecyclelr' # 'linearwarmupcosinelr' 'onecyclelr'
+finetuning_mode: "end-to-end"
+dataset_names: '/TimeseriesDatasets/forecasting/autoformer/ETTh1.csv'
+debug: False
+init_lr: 0.001 # 1e-4
+loss_type: "smape" # MSE by default
+use_amp: False # Do not used mixed precision training
+
+# Model parameters
+model_name: "TimesNet"
+seq_len: 512
+# Partly taken from https://github.com/thuml/Time-Series-Library/blob/main/scripts/short_term_forecast/TimesNet_M4.sh
+d_model: 32
+d_ff: 32
+e_layers: 2
+d_layers: 1
+top_k: 5 
+num_kernels: 6
+forecast_horizon: 0

@@ -1,0 +1,10 @@
+# Training parameters
+task_name: "pre-training"
+
+# Model parameters
+model_name: "MOMENT"
+transformer_type: "encoder_only"
+d_model: null
+seq_len: 512
+patch_len: 8
+patch_stride_len: 8

@@ -1,0 +1,36 @@
+task_name: "pre-training"
+run_name: "FPT - MOMENT"
+random_seed : 13
+debug: False
+
+# Model parameters
+model_name: "MOMENT"
+transformer_backbone: 'google/flan-t5-large' 
+pretraining_run_name: "fearless-planet-52-large" 
+pretraining_opt_steps: null
+d_model: 1024
+add_positional_embedding: True
+randomly_initialize_backbone: False
+return_last_only: True
+input_layer_sizes: []
+output_layer_sizes: []
+
+# Training parameters
+batch_size: 8
+learning_rate: 0.001 # 1e-3
+num_epochs: 1000
+steps_per_epoch: 500 # 500, 100
+dropout: 0.1
+orth_gain: 1.41
+
+# # FPT datasets parameters
+# input_dim: 48 # 48 for CIFAR-10, 16 for MNIST, 50 for BitMemory, 1 for BitXOR, 32128 for IMDB
+# output_dim: 10 # 10 for CIFAR, MNIST, 100 for BitMemory, 2 for BitXOR, 2 for IMDB
+# use_embeddings_for_input: False # True for IMDB
+
+# FPT experiment parameters
+freeze_transformer_backbone: True
+freeze_layer_norm: False
+freeze_pos: False
+freeze_ff: True
+freeze_attn: True

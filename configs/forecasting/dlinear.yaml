@@ -1,0 +1,31 @@
+# Data loader parameters
+task_name: "long-horizon-forecasting"
+train_batch_size : 64 # 1024 2048 3072 4096
+val_batch_size: 256 # 1024 2048 3072 4096 
+shuffle: True
+scale : True 
+random_seed : 13
+
+# Data parameters
+output_type: 'multivariate' # 'multivariate' 'univariate'
+seq_len : 512
+forecast_horizon: 96
+n_channels: 7
+
+# Model parameters
+model_name: "DLinear"
+share_model: True # Whether to share the model across channels
+head_dropout: 0.1
+kernel_size: 25 # From https://arxiv.org/pdf/2205.13504.pdf
+
+# Experiment parameters
+pct_start: 0.3
+max_epoch: 50
+lr_scheduler_type: 'onecyclelr' # 'linearwarmupcosinelr' 'onecyclelr' 'none'
+dataset_names: '/TimeseriesDatasets/forecasting/autoformer/ETTh1.csv'
+init_lr: 0.0001
+loss_type: "mse" # MSE by default
+log_interval: 100
+checkpoint_interval: 500
+use_amp: False
+weight_decay: 0.01
