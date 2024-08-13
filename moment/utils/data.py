@@ -42,7 +42,7 @@ def upsample_timeseries(
         timeseries = interpolate_timeseries(timeseries, seq_len)
     elif sampling_type == "pad" and direction == "forward":
         timeseries = np.pad(timeseries, (0, seq_len - timeseries_len), **kwargs)
-        input_mask[: seq_len - timeseries_len] = 0
+        input_mask[timeseries_len:] = 0
     elif sampling_type == "pad" and direction == "backward":
         timeseries = np.pad(timeseries, (seq_len - timeseries_len, 0), **kwargs)
         input_mask[: seq_len - timeseries_len] = 0
