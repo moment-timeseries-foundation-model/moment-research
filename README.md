@@ -60,7 +60,7 @@ A time series is broken into disjoint fixed-length sub-sequences called patches,
 
 Install the package using:
 ```bash
-pip install git+https://github.com/mononitogoswami/MOMENT.git
+pip install git+https://github.com/moment-timeseries-foundation-model/moment-research.git
 ```
 
 To use the model, you can use the following code:
